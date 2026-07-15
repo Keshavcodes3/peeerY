@@ -128,28 +128,31 @@ export default function MessagesPage() {
     }, [messages, selected?._id]);
 
     const sendMessage = () => {
+        // Prevent action if already processing or no input/connection
         if (!input.trim() || !selected || !socketRef.current) return;
         
-        // Prevent double sending
+        // 1. Capture and clear input immediately
         const textToSend = input.trim();
         setInput("");
         
+        // 2. Prepare message
         const myId = user?._id ?? user?.userId ?? "me";
+        const msgId = `${myId}-${Date.now()}`;
         
         const msg: ChatMessage = {
-            id: `${myId}-${Date.now()}`,
+            id: msgId,
             from: myId,
             text: textToSend,
             ts: Date.now(),
         };
 
-        // Emit to server
+        // 3. Emit and update UI
         socketRef.current.emit("direct:message", {
             matchId: selected._id,
             text: textToSend,
+            id: msgId // Send ID for server de-duplication
         });
 
-        // Optimistically append
         setMessages(prev => ({
             ...prev,
             [selected._id]: [...(prev[selected._id] ?? []), msg],
