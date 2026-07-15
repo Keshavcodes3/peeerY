@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useMotionValue } from 'framer-motion';
-import { type DiscoverProfile as BuilderProfile } from '../types/discover.types';
-
+import { type BuilderProfile } from '../data/mockData';
+        
 export function useSwipeDeck(
     profiles: BuilderProfile[],
     onMatch: (profile: BuilderProfile) => void
@@ -30,7 +30,7 @@ export function useSwipeDeck(
             setLastAction(null);
 
             if (direction === 'right' || direction === 'super') {
-                if ((currentProfile.matchScore ?? 0) > 5 || direction === 'super') {
+                if (currentProfile.matchPercentage > 80 || direction === 'super') {
                     onMatch(currentProfile);
                 }
             }
