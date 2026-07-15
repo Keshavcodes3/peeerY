@@ -98,6 +98,8 @@ export default function DiscoverPage() {
   const [trendingProjects, setTrendingProjects] = useState<ProjectFull[]>([]);
   const [isTrendingLoading, setIsTrendingLoading] = useState(true);
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   // Fetch logged-in user's profile and projects
   useEffect(() => {
     // 1. Fetch own profile for profile completion widget
@@ -239,17 +241,25 @@ export default function DiscoverPage() {
       <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
 
         {/* Search header */}
-        <header className="db-surface h-16 border-b db-line px-8 flex items-center justify-between sticky top-0 z-10 shrink-0">
-          <div className="relative w-96">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 db-ink-soft" size={16} />
-            <input
-              type="text"
-              placeholder="Search builders by role, skills, or stack..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="db-input w-full db-line-bg border db-line rounded-lg pl-9 pr-12 py-2 text-xs font-medium db-ink"
-            />
-            <span className="font-mono absolute right-3 top-1/2 -translate-y-1/2 text-[9px] db-ink-soft border db-line px-1.5 py-0.5 rounded db-surface">⌘ K</span>
+        <header className="db-surface h-16 border-b db-line px-4 md:px-8 flex items-center justify-between sticky top-0 z-10 shrink-0">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="md:hidden p-2 db-surface border db-line rounded-lg db-ink-soft hover:db-ink"
+            >
+              <User size={16} />
+            </button>
+            <div className="relative w-full md:w-96">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 db-ink-soft" size={16} />
+              <input
+                type="text"
+                placeholder="Search builders..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="db-input w-full db-line-bg border db-line rounded-lg pl-9 pr-12 py-2 text-xs font-medium db-ink"
+              />
+              <span className="hidden md:block font-mono absolute right-3 top-1/2 -translate-y-1/2 text-[9px] db-ink-soft border db-line px-1.5 py-0.5 rounded db-surface">⌘ K</span>
+            </div>
           </div>
 
           <div className="flex items-center gap-3">
@@ -693,8 +703,19 @@ export default function DiscoverPage() {
         </div>
       </div>
 
-      {/* RIGHT SIDEBAR PANEL */}
-      <aside className="db-surface w-72 border-l db-line flex flex-col shrink-0 p-6 overflow-y-auto no-scrollbar gap-6">
+      {isSidebarOpen && (
+        <div
+          className="md:hidden fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+      <aside className={`db-surface fixed inset-y-0 right-0 z-50 w-72 border-l db-line flex flex-col shrink-0 p-6 overflow-y-auto no-scrollbar gap-6 transform transition-transform duration-300 md:relative md:transform-none ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'}`}>
+        <button
+          onClick={() => setIsSidebarOpen(false)}
+          className="md:hidden absolute top-4 right-4 p-2 db-surface border db-line rounded-lg"
+        >
+          <X size={16} />
+        </button>
 
         {/* Profile completion */}
         <div className="border db-line rounded-2xl p-5 space-y-4">
