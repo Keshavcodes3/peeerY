@@ -256,9 +256,9 @@ export default function DiscoverPage() {
             <button
               // onClick={toggleTheme}
               className="p-2 border db-line rounded-lg db-ink-soft hover:db-ink db-surface transition-all flex items-center justify-center cursor-pointer"
-              title={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
+              title={(theme as string) === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
             >
-              {theme === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
+              {(theme as string) === 'dark' ? <Sun size={14} /> : <Moon size={14} />}
             </button>
             <button
               onClick={() => navigate('/network')}

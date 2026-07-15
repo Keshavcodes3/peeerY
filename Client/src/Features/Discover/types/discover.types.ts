@@ -49,6 +49,7 @@ export interface PublicProfile {
     totalProject?: number;
     Achievements?: string[];
     Rank?: string;
+    matchScore?: number;
 }
 
 export interface PublicProject {
