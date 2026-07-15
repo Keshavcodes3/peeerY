@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth as useClerkAuth, AuthenticateWithRedirectCallback } from "@clerk/clerk-react";
+import { Analytics } from '@vercel/analytics/react';
 import LandingPage from "./Features/landing/LandingPage";
 import Register from "./Features/Auth/Pages/Register";
 import Login from "./Features/Auth/Pages/Login";
@@ -44,6 +45,7 @@ function App() {
 
   return (
     <Router>
+      <Analytics />
       {/* Injects the Clerk JWT into all axios requests */}
       <AxiosInterceptorSetup />
 
