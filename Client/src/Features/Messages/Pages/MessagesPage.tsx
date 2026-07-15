@@ -161,13 +161,19 @@ export default function MessagesPage() {
 
     const getOtherUser = (match: Match): MatchUser => {
         const myId = user?._id ?? user?.userId;
-        if (!myId) return match.userOne;
-        return match.userOne._id === myId ? match.userTwo : match.userOne;
+        const fallback: MatchUser = { _id: "", username: "Builder", email: "" };
+        if (!match) return fallback;
+        if (!myId) return match.userOne || match.userTwo || fallback;
+        
+        const oneId = match.userOne?._id;
+        if (oneId === myId) return match.userTwo || fallback;
+        return match.userOne || fallback;
     };
 
-    const filteredMatches = matches.filter(match => {
+    const filteredMatches = (matches || []).filter(match => {
+        if (!match) return false;
         const other = getOtherUser(match);
-        return (other.username || "").toLowerCase().includes(searchQuery.toLowerCase());
+        return (other?.username || "").toLowerCase().includes(searchQuery.toLowerCase());
     });
 
     // Fetch chat history and join room when conversation selection changes
