@@ -313,12 +313,12 @@ export default function DiscoverPage() {
 
             {/* Tabs + filter toolbar */}
             <div className="flex flex-wrap items-center justify-between gap-3">
-              <div className="flex db-line-bg p-1 rounded-lg w-fit border db-line">
+              <div className="flex db-line-bg p-1 rounded-lg w-full sm:w-auto border db-line overflow-x-auto no-scrollbar shrink-0">
                 {(['For You', 'Top Match', 'Most Active', 'New Builders', 'All Users'] as const).map((tab) => (
                   <button
                     key={tab}
                     onClick={() => setActiveTab(tab)}
-                    className={`text-xs px-3.5 py-1.5 rounded-md font-medium transition-all cursor-pointer ${activeTab === tab
+                    className={`text-[10px] sm:text-xs px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-md font-medium transition-all cursor-pointer whitespace-nowrap ${activeTab === tab
                       ? 'db-surface db-ink shadow-sm'
                       : 'db-ink-soft hover:db-ink'
                       }`}
@@ -328,24 +328,24 @@ export default function DiscoverPage() {
                 ))}
               </div>
 
-              <div className="flex items-center gap-2 relative">
+              <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 relative w-full sm:w-auto">
                 {/* Role dropdown */}
                 <div className="relative">
                   <button
                     onClick={() => setOpenFilter(openFilter === 'role' ? null : 'role')}
-                    className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-colors cursor-pointer ${selectedRole !== 'All Roles' ? 'db-signal-bg db-signal border-transparent' : 'db-surface db-line db-ink-soft hover:db-ink'
+                    className={`flex items-center gap-1.5 text-[10px] sm:text-xs font-medium px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border transition-colors cursor-pointer ${selectedRole !== 'All Roles' ? 'db-signal-bg db-signal border-transparent' : 'db-surface db-line db-ink-soft hover:db-ink'
                       }`}
                   >
                     {selectedRole === 'All Roles' ? 'Role' : selectedRole.split(' ')[0]}
-                    <ChevronDown size={12} />
+                    <ChevronDown size={10} className="sm:w-3 sm:h-3" />
                   </button>
                   {openFilter === 'role' && (
-                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-1.5 w-52 z-50 space-y-0.5">
+                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-1.5 w-44 sm:w-52 z-50 space-y-0.5">
                       {['All Roles', 'Backend Developer', 'Frontend Developer', 'Full Stack Developer', 'DevOps Engineer'].map((role) => (
                         <button
                           key={role}
                           onClick={() => { setSelectedRole(role); setOpenFilter(null); }}
-                          className={`w-full text-left text-xs py-1.5 px-2.5 rounded-md font-medium transition-all ${selectedRole === role ? 'db-signal-bg db-signal' : 'db-ink-soft hover:db-line-bg'
+                          className={`w-full text-left text-[10px] sm:text-xs py-1 sm:py-1.5 px-2 rounded-md font-medium transition-all ${selectedRole === role ? 'db-signal-bg db-signal' : 'db-ink-soft hover:db-line-bg'
                             }`}
                         >
                           {role}
@@ -359,16 +359,16 @@ export default function DiscoverPage() {
                 <div className="relative">
                   <button
                     onClick={() => setOpenFilter(openFilter === 'skills' ? null : 'skills')}
-                    className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-colors cursor-pointer ${selectedSkills.length > 0 ? 'db-signal-bg db-signal border-transparent' : 'db-surface db-line db-ink-soft hover:db-ink'
+                    className={`flex items-center gap-1.5 text-[10px] sm:text-xs font-medium px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border transition-colors cursor-pointer ${selectedSkills.length > 0 ? 'db-signal-bg db-signal border-transparent' : 'db-surface db-line db-ink-soft hover:db-ink'
                       }`}
                   >
                     {selectedSkills.length > 0 ? `Skills · ${selectedSkills.length}` : 'Skills'}
-                    <ChevronDown size={12} />
+                    <ChevronDown size={10} className="sm:w-3 sm:h-3" />
                   </button>
                   {openFilter === 'skills' && (
-                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-3 w-64 z-50 space-y-2.5">
+                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-2.5 sm:p-3 w-56 sm:w-64 z-50 space-y-2">
                       <div className="relative">
-                        <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 db-ink-soft" size={13} />
+                        <Search className="absolute left-2 top-1/2 -translate-y-1/2 db-ink-soft w-3 h-3 sm:w-3.5 sm:h-3.5" />
                         <input
                           autoFocus
                           type="text"
@@ -383,19 +383,19 @@ export default function DiscoverPage() {
                               setNewSkillInput('');
                             }
                           }}
-                          className="db-input w-full db-line-bg border db-line rounded-lg pl-8 pr-3 py-1.5 text-xs db-ink"
+                          className="db-input w-full db-line-bg border db-line rounded-lg pl-7 pr-3 py-1 text-[10px] sm:text-xs db-ink"
                         />
                       </div>
                       {selectedSkills.length > 0 && (
                         <div className="flex flex-wrap gap-1">
                           {selectedSkills.map((skill) => (
-                            <span key={skill} className="db-chip flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-medium">
+                            <span key={skill} className="db-chip flex items-center gap-1 px-1.5 py-0.5 rounded text-[9px] font-medium">
                               {skill}
                               <button
                                 onClick={() => setSelectedSkills(selectedSkills.filter((s) => s !== skill))}
                                 className="db-ink-soft hover:db-ink"
                               >
-                                <X size={10} />
+                                <X size={8} />
                               </button>
                             </span>
                           ))}
@@ -409,22 +409,22 @@ export default function DiscoverPage() {
                 <div className="relative">
                   <button
                     onClick={() => setOpenFilter(openFilter === 'availability' ? null : 'availability')}
-                    className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border db-surface db-line db-ink-soft hover:db-ink transition-colors cursor-pointer"
+                    className="flex items-center gap-1.5 text-[10px] sm:text-xs font-medium px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border db-surface db-line db-ink-soft hover:db-ink transition-colors cursor-pointer"
                   >
                     Availability
-                    <ChevronDown size={12} />
+                    <ChevronDown size={10} className="sm:w-3 sm:h-3" />
                   </button>
                   {openFilter === 'availability' && (
-                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-3 w-48 z-50 space-y-2">
+                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-2.5 sm:p-3 w-40 sm:w-48 z-50 space-y-1.5">
                       {Object.keys(availabilities).map((key) => (
                         <label key={key} className="flex items-center gap-2 cursor-pointer select-none">
                           <input
                             type="checkbox"
                             checked={availabilities[key]}
                             onChange={() => setAvailabilities({ ...availabilities, [key]: !availabilities[key] })}
-                            className="w-4 h-4 accent-current db-signal rounded"
+                            className="w-3.5 h-3.5 sm:w-4 sm:h-4 accent-current db-signal rounded"
                           />
-                          <span className="text-xs font-medium db-ink-soft hover:db-ink">{key}</span>
+                          <span className="text-[10px] sm:text-xs font-medium db-ink-soft hover:db-ink">{key}</span>
                         </label>
                       ))}
                     </div>
@@ -435,19 +435,19 @@ export default function DiscoverPage() {
                 <div className="relative">
                   <button
                     onClick={() => setOpenFilter(openFilter === 'experience' ? null : 'experience')}
-                    className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-lg border transition-colors cursor-pointer ${selectedExperience !== 'All Experience' ? 'db-signal-bg db-signal border-transparent' : 'db-surface db-line db-ink-soft hover:db-ink'
+                    className={`flex items-center gap-1.5 text-[10px] sm:text-xs font-medium px-2 sm:px-3 py-1 sm:py-1.5 rounded-lg border transition-colors cursor-pointer ${selectedExperience !== 'All Experience' ? 'db-signal-bg db-signal border-transparent' : 'db-surface db-line db-ink-soft hover:db-ink'
                       }`}
                   >
                     {selectedExperience === 'All Experience' ? 'Experience' : selectedExperience}
-                    <ChevronDown size={12} />
+                    <ChevronDown size={10} className="sm:w-3 sm:h-3" />
                   </button>
                   {openFilter === 'experience' && (
-                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-1.5 w-40 z-50 space-y-0.5">
+                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-1.5 w-32 sm:w-40 z-50 space-y-0.5">
                       {['All Experience', 'Beginner', 'Intermediate', 'God'].map((exp) => (
                         <button
                           key={exp}
                           onClick={() => { setSelectedExperience(exp); setOpenFilter(null); }}
-                          className={`w-full text-left text-xs py-1.5 px-2.5 rounded-md font-medium transition-all ${selectedExperience === exp ? 'db-signal-bg db-signal' : 'db-ink-soft hover:db-line-bg'
+                          className={`w-full text-left text-[10px] sm:text-xs py-1 sm:py-1.5 px-2 rounded-md font-medium transition-all ${selectedExperience === exp ? 'db-signal-bg db-signal' : 'db-ink-soft hover:db-line-bg'
                             }`}
                         >
                           {exp}
@@ -458,7 +458,7 @@ export default function DiscoverPage() {
                 </div>
 
                 {hasActiveFilters && (
-                  <button onClick={resetFilters} className="font-mono text-[10px] db-ink-soft hover:db-ink underline underline-offset-2 ml-1">
+                  <button onClick={resetFilters} className="font-mono text-[9px] sm:text-[10px] db-ink-soft hover:db-ink underline underline-offset-2 ml-1">
                     reset
                   </button>
                 )}

@@ -215,14 +215,14 @@ export default function NetworkPage() {
             </AnimatePresence>
 
             {/* Header */}
-            <div className="flex items-end justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                 <div>
                     <h1 className="text-2xl font-black tracking-tight font-display text-zinc-950">Network</h1>
                     <p className="text-sm text-zinc-500 mt-0.5">Your builder connections, requests & project invitations</p>
                 </div>
                 <button
                     onClick={() => navigate("/discover")}
-                    className="text-xs font-bold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1.5"
+                    className="text-xs font-bold text-blue-600 border border-blue-200 bg-blue-50 hover:bg-blue-100 px-3 py-1.5 rounded-full transition-colors flex items-center gap-1.5 self-start sm:self-auto"
                 >
                     <ExternalLink size={12} />
                     Find Builders
@@ -297,16 +297,18 @@ export default function NetworkPage() {
                                     <motion.div
                                         key={match._id}
                                         layout
-                                        className="flex items-center gap-4 bg-white border border-zinc-200/80 rounded-2xl p-4 hover:border-zinc-300 hover:shadow-sm transition-all"
+                                        className="flex flex-col sm:flex-row sm:items-center gap-4 bg-white border border-zinc-200/80 rounded-2xl p-4 hover:border-zinc-300 hover:shadow-sm transition-all"
                                     >
-                                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${getGradient(peer?.username ?? "U")} flex items-center justify-center text-white text-sm font-bold uppercase shrink-0`}>
-                                            {peer?.username?.[0] ?? "U"}
+                                        <div className="flex items-center gap-3 flex-1 min-w-0">
+                                            <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${getGradient(peer?.username ?? "U")} flex items-center justify-center text-white text-sm font-bold uppercase shrink-0`}>
+                                                {peer?.username?.[0] ?? "U"}
+                                            </div>
+                                            <div className="min-w-0">
+                                                <p className="text-sm font-bold text-zinc-950">{peer?.username ?? "Builder"}</p>
+                                                <p className="text-xs text-zinc-400 truncate">{peer?.email}</p>
+                                            </div>
                                         </div>
-                                        <div className="flex-1 min-w-0">
-                                            <p className="text-sm font-bold text-zinc-950">{peer?.username ?? "Builder"}</p>
-                                            <p className="text-xs text-zinc-400 truncate">{peer?.email}</p>
-                                        </div>
-                                        <div className="flex items-center gap-2 shrink-0">
+                                        <div className="flex flex-wrap items-center gap-2 shrink-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-zinc-100">
                                             <span className="bg-emerald-50 text-emerald-600 border border-emerald-100 text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
                                                 <Heart size={9} /> Matched
                                             </span>
@@ -349,16 +351,18 @@ export default function NetworkPage() {
                                 <motion.div
                                     key={req._id}
                                     layout
-                                    className="flex items-center gap-4 bg-white border border-zinc-200/80 rounded-2xl p-4 hover:border-zinc-300 transition-all"
+                                    className="flex flex-col sm:flex-row sm:items-center gap-4 bg-white border border-zinc-200/80 rounded-2xl p-4 hover:border-zinc-300 transition-all"
                                 >
-                                    <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${getGradient(req.userOne?.username ?? "U")} flex items-center justify-center text-white text-sm font-bold uppercase shrink-0`}>
-                                        {req.userOne?.username?.[0] ?? "U"}
+                                    <div className="flex items-center gap-3 flex-1 min-w-0">
+                                        <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${getGradient(req.userOne?.username ?? "U")} flex items-center justify-center text-white text-sm font-bold uppercase shrink-0`}>
+                                            {req.userOne?.username?.[0] ?? "U"}
+                                        </div>
+                                        <div className="min-w-0">
+                                            <p className="text-sm font-bold text-zinc-950">{req.userOne?.username ?? "Builder"}</p>
+                                            <p className="text-xs text-zinc-400 truncate">{req.userOne?.email}</p>
+                                        </div>
                                     </div>
-                                    <div className="flex-1 min-w-0">
-                                        <p className="text-sm font-bold text-zinc-950">{req.userOne?.username ?? "Builder"}</p>
-                                        <p className="text-xs text-zinc-400 truncate">{req.userOne?.email}</p>
-                                    </div>
-                                    <div className="flex items-center gap-2 shrink-0">
+                                    <div className="flex items-center gap-2 shrink-0 pt-3 sm:pt-0 border-t sm:border-t-0 border-zinc-100 justify-end">
                                         <button
                                             onClick={() => handleReject(req._id)}
                                             disabled={actionId === req._id}
@@ -400,12 +404,12 @@ export default function NetworkPage() {
                                 <motion.div
                                     key={inv._id}
                                     layout
-                                    className="bg-white border border-zinc-200/80 rounded-2xl p-5 hover:border-zinc-300 hover:shadow-sm transition-all space-y-4"
+                                    className="bg-white border border-zinc-200/80 rounded-2xl p-4 sm:p-5 hover:border-zinc-300 hover:shadow-sm transition-all space-y-3 sm:space-y-4"
                                 >
-                                    <div className="flex items-start justify-between gap-3">
+                                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3">
                                         <div className="flex items-center gap-3">
-                                            <div className="w-9 h-9 rounded-xl bg-violet-50 border border-violet-100 flex items-center justify-center shrink-0">
-                                                <FolderOpen size={16} className="text-violet-500" />
+                                            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-violet-50 border border-violet-100 flex items-center justify-center shrink-0">
+                                                <FolderOpen size={14} className="text-violet-500" />
                                             </div>
                                             <div>
                                                 <p className="text-sm font-bold text-zinc-950">{inv.project?.title ?? "Unknown Project"}</p>
@@ -415,13 +419,13 @@ export default function NetworkPage() {
                                             </div>
                                         </div>
                                         {inv.role && (
-                                            <span className="text-[10px] font-bold px-2 py-0.5 bg-blue-50 text-blue-600 border border-blue-100 rounded-full whitespace-nowrap">
+                                            <span className="text-[9px] sm:text-[10px] font-bold px-2 py-0.5 bg-blue-50 text-blue-600 border border-blue-100 rounded-full whitespace-nowrap">
                                                 {inv.role}
                                             </span>
                                         )}
                                     </div>
 
-                                    <div className="flex items-center gap-2 text-xs text-zinc-500">
+                                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 text-xs text-zinc-500">
                                         <div className={`w-5 h-5 rounded-full bg-gradient-to-br ${getGradient(inv.from?.username ?? "U")} flex items-center justify-center text-white text-[9px] font-bold uppercase`}>
                                             {inv.from?.username?.[0] ?? "?"}
                                         </div>
@@ -432,7 +436,7 @@ export default function NetworkPage() {
                                         <span>{new Date(inv.createdAt).toLocaleDateString()}</span>
                                     </div>
 
-                                    <div className="flex gap-2 pt-1 border-t border-zinc-50">
+                                    <div className="flex flex-col sm:flex-row gap-2 pt-3 border-t border-zinc-50">
                                         <button
                                             onClick={() => handleInvReject(inv._id)}
                                             disabled={actionId === inv._id}

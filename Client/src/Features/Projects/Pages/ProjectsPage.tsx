@@ -368,14 +368,14 @@ export default function ProjectsPage() {
             </AnimatePresence>
 
             {/* Header */}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
                     <h1 className="text-2xl font-black tracking-tight font-display text-zinc-950">Projects</h1>
                     <p className="text-sm text-zinc-500 mt-0.5">Manage your projects and workspaces</p>
                 </div>
                 <button
                     onClick={openCreateModal}
-                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2.5 rounded-full shadow-sm transition-colors cursor-pointer"
+                    className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2.5 rounded-full shadow-sm transition-colors cursor-pointer self-start sm:self-auto"
                 >
                     <Plus size={15} />
                     New Project
@@ -383,22 +383,22 @@ export default function ProjectsPage() {
             </div>
 
             {/* Tabs */}
-            <div className="flex border-b border-zinc-200 gap-1">
+            <div className="flex border-b border-zinc-200 gap-1 overflow-x-auto no-scrollbar shrink-0">
                 {tabs.map(tab => {
                     const Icon = tab.icon;
                     return (
                         <button
                             key={tab.id}
                             onClick={() => setActiveTab(tab.id)}
-                            className={`flex items-center gap-2 px-4 py-3 text-sm font-bold border-b-2 transition-all cursor-pointer ${
+                            className={`flex items-center gap-2 px-3 sm:px-4 py-3 text-xs sm:text-sm font-bold border-b-2 transition-all cursor-pointer whitespace-nowrap ${
                                 activeTab === tab.id
                                     ? "border-blue-600 text-blue-600"
                                     : "border-transparent text-zinc-400 hover:text-zinc-700"
                             }`}
                         >
-                            <Icon size={15} />
+                            <Icon size={14} />
                             <span>{tab.label}</span>
-                            <span className={`text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                            <span className={`text-[9px] sm:text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
                                 activeTab === tab.id ? "bg-blue-100 text-blue-700" : "bg-zinc-100 text-zinc-400"
                             }`}>{tab.count}</span>
                         </button>
@@ -449,15 +449,15 @@ export default function ProjectsPage() {
                                 <div
                                     key={proj._id}
                                     onClick={() => openProjectDetails(proj)}
-                                    className="bg-white border border-zinc-200/80 rounded-2xl p-5 space-y-4 hover:border-zinc-300 hover:shadow-sm transition-all cursor-pointer relative group/card"
+                                    className="bg-white border border-zinc-200/80 rounded-2xl p-4 sm:p-5 space-y-3 sm:space-y-4 hover:border-zinc-300 hover:shadow-sm transition-all cursor-pointer relative group/card"
                                 >
-                                    <div className="flex justify-between items-start">
-                                        <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${badgeStyle}`}>
+                                    <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
+                                        <span className={`text-[9px] sm:text-[10px] font-bold px-2 py-0.5 rounded-full border ${badgeStyle}`}>
                                             {badgeLabel}
                                         </span>
                                         <div className="flex items-center gap-1.5">
                                             {"Stage" in proj && proj.Stage && (
-                                                <span className="text-[10px] text-zinc-400 font-mono capitalize">{proj.Stage.toLowerCase()}</span>
+                                                <span className="text-[9px] sm:text-[10px] text-zinc-400 font-mono capitalize whitespace-nowrap">{proj.Stage.toLowerCase()}</span>
                                             )}
                                             {activeTab === "explore" && (
                                                 <button
@@ -476,13 +476,13 @@ export default function ProjectsPage() {
                                     {"techStack" in proj && proj.techStack && proj.techStack.length > 0 && (
                                         <div className="flex flex-wrap gap-1.5">
                                             {proj.techStack.slice(0, 4).map((t: string) => (
-                                                <span key={t} className="text-[9px] font-bold px-2 py-0.5 bg-zinc-50 border border-zinc-200 text-zinc-500 rounded">
+                                                <span key={t} className="text-[8px] sm:text-[9px] font-bold px-1.5 py-0.5 bg-zinc-50 border border-zinc-200 text-zinc-500 rounded whitespace-nowrap">
                                                     {t}
                                                 </span>
                                             ))}
                                         </div>
                                     )}
-                                    <div className="pt-3 border-t border-zinc-50 flex justify-between items-center">
+                                    <div className="pt-3 border-t border-zinc-50 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                                         {"membersCount" in proj && (
                                             <span className="text-xs font-semibold text-zinc-400 flex items-center gap-1">
                                                 <Users size={12} />
