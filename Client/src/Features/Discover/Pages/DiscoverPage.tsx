@@ -63,8 +63,7 @@ export default function DiscoverPage() {
   useAuth();
 
   // Theme: read once on mount from localStorage, fall back to system preference
-  // const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const theme = "light"
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
   // Tabs: For You (matchScore desc), High Match (score > 3), Most Active (exp tiered), New Builders (unmatched)
   // Search query state

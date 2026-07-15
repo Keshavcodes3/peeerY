@@ -5,7 +5,7 @@ import { FaGithub } from "react-icons/fa";
 import {
   ArrowLeft, Users, Trophy, Activity, Share2, Loader2, AlertCircle, Globe,
   Briefcase, CheckCircle, MessageSquare, ExternalLink, TrendingUp, Zap, Sparkles,
-  Cpu, Layout, Database, Code2, Layers, MapPin, ShieldCheck, Clock, Check, X
+  Database, Code2, Layers, MapPin, ShieldCheck, Check, X
 } from 'lucide-react';
 import discoverService from '../services/discover.service';
 import type { PublicProfile, PublicProject, LikeResult } from '../types/discover.types';

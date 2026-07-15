@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { useMotionValue } from 'framer-motion';
-import { type BuilderProfile } from '../data/mockData';
+import { type DiscoverProfile as BuilderProfile } from '../types/discover.types';
 
 export function useSwipeDeck(
     profiles: BuilderProfile[],

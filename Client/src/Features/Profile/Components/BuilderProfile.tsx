@@ -1,8 +1,3 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { ContributionGraph } from './ContributionGraph';
-import { Github, Linkedin, Twitter, Globe, Users, Trophy } from 'lucide-react';
-
 export const BuilderProfile = ({ user }: { user: any }) => {
     return (
         <div className="min-h-screen bg-black text-white p-8">

@@ -13,7 +13,7 @@ export interface DiscoverProfile {
     Bio: string;
     experience: string;
     Rank: string;
-    matchScore: number;
+    matchScore?: number;
     avaliabilty?: boolean;
 }
 
