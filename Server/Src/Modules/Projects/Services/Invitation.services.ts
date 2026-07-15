@@ -137,7 +137,7 @@ const acceptInvitation = async (invitationId: string, userId: string) => {
         await sendJoinConfirmationEmail(
             invitedUserDoc.email,
             projectDoc.title,
-            `http://localhost:5173/project/${invitation.projectId}/workspace`, // Assuming standard URL structure
+            `https://peeery.onrender.com/project/${invitation.projectId}/workspace`, // Assuming standard URL structure
             memberRole,
             "Team Lead" // Placeholder, maybe get from inviterUser
         );

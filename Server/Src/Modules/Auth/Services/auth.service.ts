@@ -63,8 +63,8 @@ export const syncUser = async (clerkId: string, email: string, username: string,
                 await sendGoogleAuthWelcomeEmail(
                     email,
                     finalUsername,
-                    `http://localhost:5173/profile/setup`,
-                    `http://localhost:5173/discover`
+                    `https://peeery.onrender.com/profile/setup`,
+                    `https://peeery.onrender.com/discover`
                 );
             } catch (emailError) {
                 console.error('[syncUser] Failed to send welcome email:', emailError);
