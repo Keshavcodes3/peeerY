@@ -53,27 +53,27 @@ export function Navbar() {
             }`}
         >
           {/* Logo */}
-          <a href="#" className="flex items-center gap-2 group pointer-events-auto">
+          <Link to="/" className="flex items-center gap-2 group pointer-events-auto" aria-label="PeerY Home">
             <motion.div
               layout="position"
               className="relative flex items-center gap-1.5"
             >
               <div className="relative w-7 h-7 flex items-center justify-center">
-                {/* Minimalist SVG Brand Mark */}
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-zinc-950">
-                  <path d="M4 4H10C13.3137 4 16 6.68629 16 10C16 13.3137 13.3137 16 10 16H4V4Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M4 16H10C13.3137 16 16 18.6863 16 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                  <circle cx="19" cy="5" r="2" className="fill-blue-600" />
-                </svg>
+            {/* Minimalist SVG Brand Mark */}
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-6 h-6 text-zinc-950" aria-hidden="true">
+              <path d="M4 4H10C13.3137 4 16 6.68629 16 10C16 13.3137 13.3137 16 10 16H4V4Z" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M4 16H10C13.3137 16 16 18.6863 16 22" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+              <circle cx="19" cy="5" r="2" className="fill-blue-600" />
+            </svg>
               </div>
               <span className="font-bold text-lg tracking-tight text-zinc-950">
                 PeerY
               </span>
             </motion.div>
-          </a>
+          </Link>
 
           {/* Desktop Nav Items */}
-          <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
+          <nav className="hidden md:flex items-center gap-6 text-sm font-medium" aria-label="Main Navigation">
             {links.map((link) => (
               <a
                 key={link.name}
@@ -116,6 +116,8 @@ export function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle mobile menu"
+              aria-expanded={mobileMenuOpen}
               className="p-1.5 text-zinc-500 hover:text-zinc-950 hover:bg-zinc-100 rounded-full transition-all"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}

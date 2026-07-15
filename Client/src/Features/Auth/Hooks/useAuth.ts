@@ -80,10 +80,12 @@ export const useAuth = () => {
                 dispatch(setCredentials({ user: response.user }));
             } else {
                 dispatch(logoutAction());
+                await signOut().catch(() => {});
             }
         } catch (err) {
             console.error("Auth init error:", err);
             dispatch(logoutAction());
+            await signOut().catch(() => {});
         } finally {
             dispatch(setInitialized(true));
             dispatch(setLoading(false));

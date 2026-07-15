@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useNavigate, Link } from 'react-router-dom';
@@ -235,6 +236,10 @@ export default function DiscoverPage() {
 
   return (
     <div className="db-root min-h-full flex antialiased overflow-hidden h-screen" data-theme={theme}>
+      <Helmet>
+        <title>Discover Developers & Collaborate - PeerY</title>
+        <meta name="description" content="Find and connect with talented developers on PeerY. Filter by skills, role, and experience to build your next project team." />
+      </Helmet>
       <DiscoverTokens />
 
       {/* MIDDLE CONTENT BLOCK */}

@@ -86,9 +86,10 @@ export default function BuilderCard({ profile, isTop = false }: BuilderCardProps
                             <div className="w-20 h-20 rounded-2xl ring-4 ring-white shadow-xl overflow-hidden bg-zinc-100">
                                 <img
                                     src={profile.avatarUrl}
-                                    alt={profile.name}
+                                    alt={`${profile.name} profile`}
                                     className="w-full h-full object-cover"
                                     draggable="false"
+                                    loading="lazy"
                                 />
                             </div>
                             {/* Online indicator */}
@@ -125,7 +126,7 @@ export default function BuilderCard({ profile, isTop = false }: BuilderCardProps
                             <Zap size={12} className="text-blue-500" /> Stack
                         </h4>
                         <div className="flex flex-wrap gap-1.5">
-                            {profile.stack.map(tech => (
+                            {(profile.stack || []).map(tech => (
                                 <span
                                     key={tech}
                                     className="px-2.5 py-1 bg-zinc-50 border border-zinc-200 rounded-lg text-[11px] font-semibold text-zinc-700"

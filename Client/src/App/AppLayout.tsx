@@ -167,7 +167,7 @@ export default function AppLayout() {
     return (
         <div className="flex h-screen bg-zinc-50/50 overflow-hidden">
             {/* Desktop sidebar */}
-            <aside className="hidden md:flex w-60 border-r border-zinc-100 bg-white flex-col shrink-0">
+            <aside className="hidden md:flex w-60 border-r border-zinc-100 bg-white flex-col shrink-0" aria-label="Sidebar">
                 <SidebarContent />
             </aside>
 
@@ -198,24 +198,25 @@ export default function AppLayout() {
             {/* Main content */}
             <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
                 {/* Mobile topbar */}
-                <header className="md:hidden flex items-center gap-3 px-4 py-3 border-b border-zinc-100 bg-white/90 backdrop-blur shrink-0">
+                <header className="md:hidden flex items-center gap-3 px-4 py-3 border-b border-zinc-100 bg-white/90 backdrop-blur shrink-0" aria-label="Mobile header">
                     <button
                         onClick={() => setMobileOpen(true)}
+                        aria-label="Open sidebar"
                         className="p-2 rounded-lg hover:bg-zinc-100 text-zinc-500"
                     >
                         <Menu size={20} />
                     </button>
-                    <span className="font-display font-bold text-zinc-950">PeerY</span>
+                    <Link to="/dashboard" className="font-display font-bold text-zinc-950">PeerY</Link>
                 </header>
 
                 {/* Page content */}
-                <main className="flex-1 overflow-y-auto">
+                <main className="flex-1 overflow-y-auto" id="main-content">
                     <Outlet />
                 </main>
             </div>
 
             {/* Global Real-time Notifications */}
-            <div className="fixed top-6 right-6 z-50 pointer-events-none flex flex-col gap-3 max-w-sm w-full">
+            <section className="fixed top-6 right-6 z-50 pointer-events-none flex flex-col gap-3 max-w-sm w-full" aria-live="polite" aria-label="Notifications">
                 <AnimatePresence>
                     {notifications.map(notif => (
                         <motion.div
@@ -242,7 +243,7 @@ export default function AppLayout() {
                         </motion.div>
                     ))}
                 </AnimatePresence>
-            </div>
+            </section>
         </div>
     );
 }
