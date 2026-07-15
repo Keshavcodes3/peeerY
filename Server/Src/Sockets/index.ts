@@ -79,7 +79,7 @@ export const initSocket = (server: any) => {
         // ─── Direct chat message relay ───────────────────────────
         // Client emits: { matchId: string, text: string }
         // Server relays to all sockets in that match room.
-        socket.on("direct:message", async (data: { matchId: string; text: string }) => {
+        socket.on("direct:message", async (data: { matchId: string; text: string; id?: string }) => {
             if (!userId || !data?.matchId || !data?.text) return;
             try {
                 // Save to MongoDB first
@@ -94,7 +94,7 @@ export const initSocket = (server: any) => {
                     from: userId,
                     text: data.text,
                     ts: new Date(savedMessage.createdAt).getTime(),
-                    id: savedMessage._id.toString()
+                    id: data.id || savedMessage._id.toString()
                 };
 
                 // Broadcast to everyone in the room (including sender for consistency)
