@@ -289,7 +289,7 @@ export default function MessagesPage() {
                     )}
                 </div>
             </div>
-
+                    {/* {} */}
             {/* Chat panel */}
             <div className={`flex-1 flex flex-col min-w-0 bg-white ${isMobileList ? 'hidden md:flex' : 'flex'}`}>
                 {!selected ? (
