@@ -45,6 +45,8 @@ export default function MessagesPage() {
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
     const [searchQuery, setSearchQuery] = useState("");
 
+    const [isMobileList, setIsMobileList] = useState(true);
+
     // Scroll to bottom of messages
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -189,9 +191,9 @@ export default function MessagesPage() {
     const selectedMessages = selected ? (messages[selected._id] ?? []) : [];
 
     return (
-        <div className="flex h-full bg-white">
+        <div className="flex h-full bg-white relative">
             {/* Sidebar — match list */}
-            <div className="w-64 border-r border-zinc-100 flex flex-col shrink-0">
+            <div className={`absolute md:relative z-20 w-full md:w-64 border-r border-zinc-100 flex flex-col shrink-0 bg-white transition-transform duration-300 ${isMobileList ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}`}>
                 <div className="p-4 border-b border-zinc-100 space-y-3">
                     <div className="flex items-center justify-between">
                         <h2 className="text-base font-black font-display text-zinc-950">Messages</h2>
@@ -247,7 +249,10 @@ export default function MessagesPage() {
                             return (
                                 <button
                                     key={match._id}
-                                    onClick={() => setSelected(match)}
+                                    onClick={() => {
+                                        setSelected(match);
+                                        setIsMobileList(false);
+                                    }}
                                     className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
                                         isActive ? "bg-blue-50" : "hover:bg-zinc-50"
                                     }`}
@@ -273,7 +278,7 @@ export default function MessagesPage() {
             </div>
 
             {/* Chat panel */}
-            <div className="flex-1 flex flex-col min-w-0">
+            <div className={`flex-1 flex flex-col min-w-0 bg-white ${isMobileList ? 'hidden md:flex' : 'flex'}`}>
                 {!selected ? (
                     <div className="flex-1 flex flex-col items-center justify-center gap-4 text-zinc-300">
                         <MessageSquare size={40} />
@@ -282,7 +287,13 @@ export default function MessagesPage() {
                 ) : (
                     <>
                         {/* Chat header */}
-                        <div className="px-6 py-4 border-b border-zinc-100 flex items-center gap-3 bg-white/90 backdrop-blur shrink-0">
+                        <div className="px-4 py-3 border-b border-zinc-100 flex items-center gap-3 bg-white/90 backdrop-blur shrink-0">
+                            <button
+                                onClick={() => setIsMobileList(true)}
+                                className="md:hidden p-1.5 -ml-1 text-zinc-500"
+                            >
+                                ←
+                            </button>
                             <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-violet-500 flex items-center justify-center text-white text-xs font-bold uppercase">
                                 {getOtherUser(selected).username?.[0] ?? "U"}
                             </div>
