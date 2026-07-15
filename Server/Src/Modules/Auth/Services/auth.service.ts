@@ -59,19 +59,24 @@ export const syncUser = async (clerkId: string, email: string, username: string,
         
         // Send welcome email if it's a Google provider
         if (provider === 'google') {
-            await sendGoogleAuthWelcomeEmail(
-                email,
-                finalUsername,
-                `http://localhost:5173/profile/setup`,
-                `http://localhost:5173/discover`
-            );
+            try {
+                await sendGoogleAuthWelcomeEmail(
+                    email,
+                    finalUsername,
+                    `http://localhost:5173/profile/setup`,
+                    `http://localhost:5173/discover`
+                );
+            } catch (emailError) {
+                console.error('[syncUser] Failed to send welcome email:', emailError);
+                // We don't want to abort the transaction just because the email failed
+            }
         }
 
       } catch (error) {
         await session.abortTransaction();
         // Log the real error so it's visible in server logs
         console.error('[syncUser] Transaction failed:', error);
-        throw new ApiError(500, `Failed to create user during sync: ${(error as Error).message}`);
+        throw new ApiError(500, `Failed to create user during sync: ${error instanceof Error ? error.message : String(error)}`);
       } finally {
         session.endSession();
       }

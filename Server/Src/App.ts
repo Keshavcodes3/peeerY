@@ -1,6 +1,7 @@
 import express from 'express';
 import helmet from 'helmet';
 import { rateLimit } from 'express-rate-limit';
+import { initSentry } from './Config/sentry.js';
 import { globalErrorHandler } from './Middlewares/error.middleware.js';
 import authRoutes from './Modules/Auth/Routes/auth.routes.js';
 import profileRoutes from './Modules/Auth/Routes/profile.routes.js';
@@ -19,6 +20,7 @@ import contributionRoutes from './Modules/Contribution/Routes/contribution.route
 import notificationRoutes from './Modules/Notification/Routes/notification.routes.js';
 import { clerkMiddleware } from '@clerk/express';
 const App = express();
+initSentry();
 // ─── CORS (must come BEFORE helmet and rate-limiter) ───────────────────────
 const allowedOrigins = [
     'http://localhost:5173',

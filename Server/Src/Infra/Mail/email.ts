@@ -6,7 +6,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export const sendInviteEmail = async (email: string, projectName: string, senderName: string) => {
     try {
         const { data, error } = await resend.emails.send({
-            from: 'peerY',
+            from: 'peerY <onboarding@resend.dev>',
             to: [email],
             subject: `You've been invited to ${projectName} on peerY`,
             html: `
@@ -40,7 +40,7 @@ export const sendJoinConfirmationEmail = async (
 ) => {
     try {
         const { data, error } = await resend.emails.send({
-            from: 'peerY', // Replace with verified domain
+            from: 'peerY <onboarding@resend.dev>', // Replace with verified domain
             to: [email],
             subject: `Welcome to the ${projectName} team! 🚀`,
             html: `
@@ -120,7 +120,7 @@ export const sendGoogleAuthWelcomeEmail = async (
 ): Promise<any> => {
     try {
         const { data, error } = await resend.emails.send({
-            from: 'peerY',
+            from: 'peerY <onboarding@resend.dev>',
             to: [email],
             subject: `Welcome to peerY, ${userName}! 🚀`,
             html: `
