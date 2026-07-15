@@ -26,7 +26,9 @@ const allowedOrigins = [
     'http://localhost:5173',
     'http://127.0.0.1:5173',
     'http://localhost:3000',
-    "https://peeery.onrender.com"
+    "https://peery.vercel.app",
+    "https://peery-git-main-keshavv.vercel.app"
+
 ];
 
 const corsOptions: cors.CorsOptions = {
