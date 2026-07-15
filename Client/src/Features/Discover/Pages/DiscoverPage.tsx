@@ -340,7 +340,7 @@ export default function DiscoverPage() {
                     <ChevronDown size={10} className="sm:w-3 sm:h-3" />
                   </button>
                   {openFilter === 'role' && (
-                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-1.5 w-44 sm:w-52 z-50 space-y-0.5">
+                    <div className="absolute left-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-1.5 w-44 sm:w-52 z-50 space-y-0.5 max-h-64 overflow-y-auto">
                       {['All Roles', 'Backend Developer', 'Frontend Developer', 'Full Stack Developer', 'DevOps Engineer'].map((role) => (
                         <button
                           key={role}
@@ -366,7 +366,7 @@ export default function DiscoverPage() {
                     <ChevronDown size={10} className="sm:w-3 sm:h-3" />
                   </button>
                   {openFilter === 'skills' && (
-                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-2.5 sm:p-3 w-56 sm:w-64 z-50 space-y-2">
+                    <div className="absolute left-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-2.5 sm:p-3 w-56 sm:w-64 z-50 space-y-2 max-h-80 overflow-y-auto">
                       <div className="relative">
                         <Search className="absolute left-2 top-1/2 -translate-y-1/2 db-ink-soft w-3 h-3 sm:w-3.5 sm:h-3.5" />
                         <input
@@ -415,7 +415,7 @@ export default function DiscoverPage() {
                     <ChevronDown size={10} className="sm:w-3 sm:h-3" />
                   </button>
                   {openFilter === 'availability' && (
-                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-2.5 sm:p-3 w-40 sm:w-48 z-50 space-y-1.5">
+                    <div className="absolute left-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-2.5 sm:p-3 w-40 sm:w-48 z-50 space-y-1.5 max-h-64 overflow-y-auto">
                       {Object.keys(availabilities).map((key) => (
                         <label key={key} className="flex items-center gap-2 cursor-pointer select-none">
                           <input
@@ -442,7 +442,7 @@ export default function DiscoverPage() {
                     <ChevronDown size={10} className="sm:w-3 sm:h-3" />
                   </button>
                   {openFilter === 'experience' && (
-                    <div className="absolute right-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-1.5 w-32 sm:w-40 z-50 space-y-0.5">
+                    <div className="absolute left-0 top-full mt-2 db-surface border db-line rounded-xl shadow-lg p-1.5 w-32 sm:w-40 z-50 space-y-0.5 max-h-64 overflow-y-auto">
                       {['All Experience', 'Beginner', 'Intermediate', 'God'].map((exp) => (
                         <button
                           key={exp}
