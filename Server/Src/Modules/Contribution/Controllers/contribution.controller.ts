@@ -1,7 +1,7 @@
 import type { Request, Response } from 'express';
 import { asyncHandler } from '../../../Utils/asyncHandler.utils.js';
-import { ContributionDay } from '../Models/ContributionDay';
-import { ContributionEvent } from '../Models/ContributionEvent';
+import { ContributionDay } from '../Models/ContributionDay.js';
+import { ContributionEvent } from '../Models/ContributionEvent.js';
 
 // @desc    Get heatmap data for a user
 // @route   GET /api/v1/contributions/heatmap/:userId

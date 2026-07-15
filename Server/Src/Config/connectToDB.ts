@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { connectRedis } from "../Infra/Redis/redis";
+import { connectRedis } from "../Infra/Redis/redis.js";
 
 export const connectToDatabase = async () => {
   const MONGO_URI = process.env.MONGO_URI

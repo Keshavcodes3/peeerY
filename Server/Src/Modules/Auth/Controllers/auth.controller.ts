@@ -1,4 +1,15 @@
 import type { Request, Response } from 'express';
+
+// Augment Request interface
+declare global {
+  namespace Express {
+    interface Request {
+      auth?: { userId?: string };
+      user?: { userId?: string };
+    }
+  }
+}
+
 import { asyncHandler } from '../../../Utils/asyncHandler.utils.js';
 import * as authService from '../Services/auth.service.js';
 import { ApiError } from '../../../Utils/ApiError.utils.js';

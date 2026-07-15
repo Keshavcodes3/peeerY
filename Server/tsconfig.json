@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "rootDir": ".",
+    "outDir": "./dist",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
+    "target": "esnext",
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+    "strict": false,
+    "jsx": "react-jsx",
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "skipLibCheck": true
+  },
+  "include": ["Src", "Server.ts", "checkMatch.ts"]
+}
