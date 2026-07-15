@@ -3,8 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaGithub } from "react-icons/fa";
 import {
-  ArrowLeft, Users, Trophy, Share2, Loader2, AlertCircle, Globe,
-  Briefcase, CheckCircle, MessageSquare, ExternalLink, TrendingUp, Zap, Sparkles,
+  ArrowLeft, Users, Trophy, Share2, Loader2, AlertCircle, Globe,CheckCircle, MessageSquare, ExternalLink, TrendingUp,
   Database, Code2, Layers, MapPin, ShieldCheck, Check, X
 } from 'lucide-react';
 import discoverService from '../services/discover.service';

@@ -18,6 +18,7 @@ createRoot(document.getElementById('root')!).render(
     <ClerkProvider publishableKey={PUBLISHABLE_KEY} afterSignOutUrl="/">
       <Provider store={store}>
         <App />
+        <Analytics />
       </Provider>
     </ClerkProvider>
   </StrictMode>

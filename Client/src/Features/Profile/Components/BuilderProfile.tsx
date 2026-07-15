@@ -1,3 +1,7 @@
+import { Users, Trophy } from 'lucide-react';
+import { ContributionGraph } from './ContributionGraph';
+
+
 export const BuilderProfile = ({ user }: { user: any }) => {
     return (
         <div className="min-h-screen bg-black text-white p-8">

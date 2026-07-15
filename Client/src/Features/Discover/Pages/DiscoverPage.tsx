@@ -63,7 +63,7 @@ export default function DiscoverPage() {
   useAuth();
 
   // Theme: read once on mount from localStorage, fall back to system preference
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme] = useState<'light' | 'dark'>('light');
 
   // Tabs: For You (matchScore desc), High Match (score > 3), Most Active (exp tiered), New Builders (unmatched)
   // Search query state
@@ -201,7 +201,7 @@ export default function DiscoverPage() {
     .filter((profile) => {
       // 6. Tab filtering
       if (activeTab === 'Top Match') {
-        return profile.matchScore > 2; // only high affinity matches
+        return (profile.matchScore ?? 0) > 2; // only high affinity matches
       }
       return true;
     })
@@ -213,9 +213,9 @@ export default function DiscoverPage() {
       }
       if (activeTab === 'New Builders') {
         // Tie-breaker: lowest scores or random distribution to discover fresh faces
-        return a.matchScore - b.matchScore;
+        return (a.matchScore ?? 0) - (b.matchScore ?? 0);
       }
-      return b.matchScore - a.matchScore; // default to For You
+      return (b.matchScore ?? 0) - (a.matchScore ?? 0); // default to For You
     });
 
   // ─── Profile completion calculation ───────────────────────────────────────
@@ -480,7 +480,7 @@ export default function DiscoverPage() {
                   </p>
 
                   <div className="pt-2">
-                    <Readout score={profiles[0].matchScore} size="lg" />
+                    <Readout score={profiles[0].matchScore ?? 0} size="lg" />
                   </div>
 
                   {/* Action */}
@@ -575,7 +575,7 @@ export default function DiscoverPage() {
                   {filteredAndSortedProfiles.map((profile) => {
                     const pills = (profile.techstack?.length ? profile.techstack : profile.skills) || [];
                     const avatar = profile.avatar || `https://i.pravatar.cc/100?u=${profile.authId}`;
-                    const t = getTier(profile.matchScore);
+                    const t = getTier(profile.matchScore ?? 0);
                     return (
                       <motion.div
                         key={profile._id}
@@ -630,7 +630,7 @@ export default function DiscoverPage() {
 
                         {/* Connect controls */}
                         <div className="flex items-center justify-between pt-3 border-t db-line">
-                          <Readout score={profile.matchScore} />
+                          <Readout score={profile.matchScore ?? 0} />
                           <div className="flex gap-2">
                             <button
                               onClick={() => navigate(`/discover/${profile._id}`)}

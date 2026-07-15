@@ -30,7 +30,7 @@ export function useSwipeDeck(
             setLastAction(null);
 
             if (direction === 'right' || direction === 'super') {
-                if (currentProfile.matchPercentage > 80 || direction === 'super') {
+                if ((currentProfile.matchScore ?? 0) > 5 || direction === 'super') {
                     onMatch(currentProfile);
                 }
             }
