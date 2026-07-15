@@ -129,19 +129,24 @@ export default function MessagesPage() {
 
     const sendMessage = () => {
         if (!input.trim() || !selected || !socketRef.current) return;
+        
+        // Prevent double sending
+        const textToSend = input.trim();
+        setInput("");
+        
         const myId = user?._id ?? user?.userId ?? "me";
-
+        
         const msg: ChatMessage = {
             id: `${myId}-${Date.now()}`,
             from: myId,
-            text: input.trim(),
+            text: textToSend,
             ts: Date.now(),
         };
 
         // Emit to server
         socketRef.current.emit("direct:message", {
             matchId: selected._id,
-            text: input.trim(),
+            text: textToSend,
         });
 
         // Optimistically append
@@ -149,7 +154,6 @@ export default function MessagesPage() {
             ...prev,
             [selected._id]: [...(prev[selected._id] ?? []), msg],
         }));
-        setInput("");
     };
 
     const getOtherUser = (match: Match): MatchUser => {
