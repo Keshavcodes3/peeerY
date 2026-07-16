@@ -1,5 +1,3 @@
-
-
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -16,8 +14,7 @@ const builders = [
     role: "Systems Engineer",
     lookingFor: "Frontend Developer",
     project: "eBPF Network Visualizer",
-    description:
-      "Building a modern network inspection platform powered by Rust and eBPF.",
+    description: "Building a modern network inspection platform powered by Rust and eBPF.",
     skills: ["Rust", "Linux", "eBPF", "Go"],
     active: true,
     joined: 2,
@@ -27,8 +24,7 @@ const builders = [
     role: "Fullstack Architect",
     lookingFor: "Systems Developer",
     project: "Collaborative Terminal Editor",
-    description:
-      "A local-first editor powered by CRDTs, Wasm and distributed syncing.",
+    description: "A local-first editor powered by CRDTs, Wasm and distributed syncing.",
     skills: ["TypeScript", "Wasm", "CRDT", "Neovim"],
     active: true,
     joined: 4,
@@ -38,8 +34,7 @@ const builders = [
     role: "ML Researcher",
     lookingFor: "Platform Engineer",
     project: "Distributed LLM Infrastructure",
-    description:
-      "Building orchestration tools for large-scale training clusters.",
+    description: "Building orchestration tools for large-scale training clusters.",
     skills: ["Python", "CUDA", "Kubernetes", "PyTorch"],
     active: false,
     joined: 3,
@@ -48,11 +43,7 @@ const builders = [
 
 export function BuildersSection() {
   return (
-    <section
-      id="builders"
-      className="relative overflow-hidden border-t border-zinc-900 py-32"
-    >
-      {/* handwritten notes */}
+    <section id="builders" className="relative overflow-hidden border-t border-zinc-900 py-20 sm:py-28 md:py-32">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         whileInView={{ opacity: 0.6, y: 0 }}
@@ -73,42 +64,29 @@ export function BuildersSection() {
         weekend build team
       </motion.div>
 
-      <div className="mx-auto max-w-7xl px-6">
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="mb-16"
-        >
+      <div className="mx-auto max-w-7xl px-5 sm:px-6">
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ duration: 0.8 }} className="mb-10 sm:mb-16">
           <div className="mb-4 flex items-center gap-3">
             <div className="h-2 w-2 rounded-full bg-blue-500" />
-            <span className="font-mono text-xs uppercase tracking-[0.3em] text-zinc-500">
-              Live Requests
-            </span>
+            <span className="font-mono text-xs uppercase tracking-[0.3em] text-zinc-500">Live Requests</span>
           </div>
 
-          <h2 className="max-w-3xl text-5xl font-bold tracking-tight text-white">
+          <h2 className="font-display max-w-3xl text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
             Builders looking for teammates right now.
           </h2>
 
-          <p className="mt-4 max-w-xl text-zinc-400">
-            Real projects. Real developers. No networking theater.
-          </p>
+          <p className="mt-4 max-w-xl text-zinc-400">Real projects. Real developers. No networking theater.</p>
         </motion.div>
 
         <Swiper
-          slidesPerView={1.15}
-          spaceBetween={24}
+          slidesPerView={1.05}
+          spaceBetween={20}
           mousewheel
           modules={[Mousewheel]}
           breakpoints={{
-            768: {
-              slidesPerView: 2.1,
-            },
-            1280: {
-              slidesPerView: 3.2,
-            },
+            640: { slidesPerView: 1.3, spaceBetween: 20 },
+            768: { slidesPerView: 2.1, spaceBetween: 24 },
+            1280: { slidesPerView: 3.2, spaceBetween: 24 },
           }}
         >
           {builders.map((builder, index) => (
@@ -116,83 +94,39 @@ export function BuildersSection() {
               <motion.div
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.7,
-                  delay: index * 0.1,
-                }}
+                transition={{ duration: 0.7, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                whileHover={{
-                  y: -8,
-                  transition: {
-                    duration: 0.2,
-                  },
-                }}
+                whileHover={{ y: -8, transition: { duration: 0.2 } }}
               >
-                <Card className="group h-[430px] border-zinc-800 bg-zinc-950/80 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700">
-                  <CardContent className="flex h-full flex-col p-7">
-                    {/* top */}
-                    <div className="mb-8 flex items-center justify-between">
-                      <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">
-                        @{builder.handle}
-                      </span>
+                <Card className="group h-[420px] sm:h-[430px] border-zinc-800 bg-zinc-950/80 backdrop-blur-sm transition-all duration-300 hover:border-zinc-700">
+                  <CardContent className="flex h-full flex-col p-6 sm:p-7">
+                    <div className="mb-6 sm:mb-8 flex items-center justify-between">
+                      <span className="font-mono text-xs uppercase tracking-widest text-zinc-500">@{builder.handle}</span>
 
                       <div className="flex items-center gap-2">
                         <motion.div
-                          animate={
-                            builder.active
-                              ? {
-                                scale: [1, 1.4, 1],
-                              }
-                              : {}
-                          }
-                          transition={{
-                            repeat: Infinity,
-                            duration: 2,
-                          }}
-                          className={`h-2 w-2 rounded-full ${builder.active
-                            ? "bg-emerald-500"
-                            : "bg-zinc-600"
-                            }`}
+                          animate={builder.active ? { scale: [1, 1.4, 1] } : {}}
+                          transition={{ repeat: Infinity, duration: 2 }}
+                          className={`h-2 w-2 rounded-full ${builder.active ? "bg-emerald-500" : "bg-zinc-600"}`}
                         />
-                        <span className="text-xs text-zinc-500">
-                          {builder.active ? "Active now" : "Recently active"}
-                        </span>
+                        <span className="text-xs text-zinc-500">{builder.active ? "Active now" : "Recently active"}</span>
                       </div>
                     </div>
 
-                    {/* looking for */}
-                    <div className="mb-8">
-                      <p className="mb-3 text-xs uppercase tracking-[0.25em] text-zinc-600">
-                        Looking For
-                      </p>
-
-                      <h3 className="text-3xl font-semibold leading-tight text-white">
-                        {builder.lookingFor}
-                      </h3>
+                    <div className="mb-6 sm:mb-8">
+                      <p className="mb-3 text-xs uppercase tracking-[0.25em] text-zinc-600">Looking For</p>
+                      <h3 className="text-2xl sm:text-3xl font-semibold leading-tight text-white">{builder.lookingFor}</h3>
                     </div>
 
-                    {/* project */}
                     <div className="mb-6">
-                      <p className="mb-2 text-xs uppercase tracking-[0.25em] text-zinc-600">
-                        Building
-                      </p>
-
-                      <h4 className="mb-3 text-lg font-medium text-zinc-100">
-                        {builder.project}
-                      </h4>
-
-                      <p className="leading-relaxed text-zinc-400">
-                        {builder.description}
-                      </p>
+                      <p className="mb-2 text-xs uppercase tracking-[0.25em] text-zinc-600">Building</p>
+                      <h4 className="mb-3 text-lg font-medium text-zinc-100">{builder.project}</h4>
+                      <p className="leading-relaxed text-zinc-400">{builder.description}</p>
                     </div>
 
-                    {/* skills */}
-                    <div className="mb-8 flex flex-wrap gap-2">
+                    <div className="mb-6 sm:mb-8 flex flex-wrap gap-2">
                       {builder.skills.map((skill) => (
-                        <Badge
-                          key={skill}
-                          className="border-zinc-800 bg-zinc-900 px-3 py-1 text-zinc-300"
-                        >
+                        <Badge key={skill} className="border-zinc-800 bg-zinc-900 px-3 py-1 text-zinc-300">
                           {skill}
                         </Badge>
                       ))}
@@ -200,24 +134,13 @@ export function BuildersSection() {
 
                     <div className="mt-auto border-t border-zinc-900 pt-6">
                       <div className="mb-5 flex items-center justify-between">
-                        <span className="text-sm text-zinc-400">
-                          {builder.joined} builders joined
-                        </span>
-
-                        <span className="font-mono text-sm text-blue-400">
-                          92% match
-                        </span>
+                        <span className="text-sm text-zinc-400">{builder.joined} builders joined</span>
+                        <span className="font-mono text-sm text-blue-400">92% match</span>
                       </div>
 
                       <button className="group/button flex w-full items-center justify-between rounded-xl border border-zinc-800 bg-zinc-900 px-4 py-3 transition-all hover:border-zinc-700">
-                        <span className="text-sm font-medium">
-                          View Project
-                        </span>
-
-                        <ArrowUpRight
-                          size={16}
-                          className="transition-transform duration-300 group-hover/button:translate-x-1 group-hover/button:-translate-y-1"
-                        />
+                        <span className="text-sm font-medium">View Project</span>
+                        <ArrowUpRight size={16} className="transition-transform duration-300 group-hover/button:translate-x-1 group-hover/button:-translate-y-1" />
                       </button>
                     </div>
                   </CardContent>

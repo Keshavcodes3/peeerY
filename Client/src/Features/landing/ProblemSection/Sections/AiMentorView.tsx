@@ -2,29 +2,19 @@ import { useState } from "react"
 import { motion } from "framer-motion"
 import { Sparkles, Send, Bot, User, Lightbulb } from "lucide-react"
 
-const SUGGESTIONS = [
-    "What should I learn next?",
-    "Review my portfolio",
-    "Help me write a README",
-    "Explain system design basics",
-]
+const SUGGESTIONS = ["What should I learn next?", "Review my portfolio", "Help me write a README", "Explain system design basics"]
 
 const CONVERSATION = [
-    {
-        role: "user" as const,
-        message: "I know React and Node.js. What should I learn next to stand out?",
-    },
+    { role: "user" as const, message: "I know React and Node.js. What should I learn next to stand out?" },
     {
         role: "ai" as const,
-        message: "Based on your stack, I'd recommend diving into **Redis** for caching and **Docker** for deployments. These two skills are massively in-demand and will level you up from builder to production-ready engineer.",
+        message:
+            "Based on your stack, I'd recommend diving into **Redis** for caching and **Docker** for deployments. Both are heavily in demand and take you from builder to production-ready engineer.",
     },
-    {
-        role: "user" as const,
-        message: "Any project ideas to practice these?",
-    },
+    { role: "user" as const, message: "Any project ideas to practice these?" },
     {
         role: "ai" as const,
-        message: "Try building a **real-time chat app** with Redis pub/sub and containerize it with Docker Compose. Ship it, and you'll have a strong portfolio piece.",
+        message: "Try a **real-time chat app** with Redis pub/sub, containerized with Docker Compose. Ship it and you've got a strong portfolio piece.",
     },
 ]
 
@@ -32,49 +22,50 @@ export function AiMentorView() {
     const [inputValue, setInputValue] = useState("")
 
     return (
-        <div className="h-full flex flex-col p-8 overflow-hidden">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-6">
+        <div className="h-full flex flex-col p-5 sm:p-8 overflow-hidden">
+            <div className="flex items-center justify-between mb-4 sm:mb-6 gap-3">
                 <div>
-                    <h3 className="text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-2">
-                        <Sparkles className="text-blue-600" size={24} />
+                    <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-zinc-900 flex items-center gap-2">
+                        <Sparkles className="text-blue-600" size={22} />
                         AI Mentor
                     </h3>
-                    <p className="text-sm text-zinc-500 mt-1">Get personalized guidance instantly.</p>
+                    <p className="text-xs sm:text-sm text-zinc-500 mt-1">Personalized guidance, any hour.</p>
                 </div>
-                <div className="px-2.5 py-1 rounded-lg bg-green-50 border border-green-100 text-green-600 text-xs font-semibold flex items-center gap-1">
+                <div className="px-2.5 py-1 rounded-lg bg-green-50 border border-green-100 text-green-600 text-xs font-semibold flex items-center gap-1 shrink-0">
                     <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
                     Online
                 </div>
             </div>
 
-            {/* Chat Area */}
-            <div className="flex-1 overflow-y-auto space-y-4 mb-6 pr-1">
+            <div className="flex-1 overflow-y-auto space-y-4 mb-4 sm:mb-6 pr-1">
                 {CONVERSATION.map((msg, i) => (
                     <motion.div
                         key={i}
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: i * 0.2, duration: 0.35 }}
-                        className={`flex gap-3 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                        className={`flex gap-2 sm:gap-3 ${msg.role === "user" ? "justify-end" : "justify-start"}`}
                     >
-                        {msg.role === 'ai' && (
+                        {msg.role === "ai" && (
                             <div className="shrink-0 w-8 h-8 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center mt-0.5">
                                 <Bot size={16} className="text-blue-600" />
                             </div>
                         )}
-                        <div className={`max-w-[80%] px-4 py-3 rounded-2xl text-sm leading-relaxed
-                            ${msg.role === 'user' 
-                                ? 'bg-zinc-900 text-white rounded-br-md' 
-                                : 'bg-zinc-50 border border-zinc-200 text-zinc-700 rounded-bl-md'}`}
+                        <div
+                            className={`max-w-[85%] sm:max-w-[80%] px-3.5 sm:px-4 py-2.5 sm:py-3 rounded-2xl text-sm leading-relaxed ${msg.role === "user" ? "bg-zinc-900 text-white rounded-br-md" : "bg-zinc-50 border border-zinc-200 text-zinc-700 rounded-bl-md"
+                                }`}
                         >
-                            {msg.message.split('**').map((part, j) => 
-                                j % 2 === 1 
-                                    ? <span key={j} className={`font-semibold ${msg.role === 'user' ? 'text-blue-300' : 'text-blue-600'}`}>{part}</span>
-                                    : <span key={j}>{part}</span>
+                            {msg.message.split("**").map((part, j) =>
+                                j % 2 === 1 ? (
+                                    <span key={j} className={`font-semibold ${msg.role === "user" ? "text-blue-300" : "text-blue-600"}`}>
+                                        {part}
+                                    </span>
+                                ) : (
+                                    <span key={j}>{part}</span>
+                                )
                             )}
                         </div>
-                        {msg.role === 'user' && (
+                        {msg.role === "user" && (
                             <div className="shrink-0 w-8 h-8 rounded-xl bg-zinc-900 border border-zinc-800 flex items-center justify-center mt-0.5">
                                 <User size={16} className="text-zinc-300" />
                             </div>
@@ -83,15 +74,9 @@ export function AiMentorView() {
                 ))}
             </div>
 
-            {/* Quick Suggestions */}
-            <motion.div 
-                className="flex flex-wrap gap-2 mb-4"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-            >
-                {SUGGESTIONS.map(suggestion => (
-                    <button 
+            <motion.div className="flex flex-wrap gap-2 mb-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 }}>
+                {SUGGESTIONS.map((suggestion) => (
+                    <button
                         key={suggestion}
                         className="px-3 py-1.5 rounded-xl bg-zinc-50 border border-zinc-200 text-xs text-zinc-600 font-medium hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 transition-all duration-200 flex items-center gap-1.5"
                     >
@@ -101,9 +86,8 @@ export function AiMentorView() {
                 ))}
             </motion.div>
 
-            {/* Input */}
             <div className="relative">
-                <input 
+                <input
                     type="text"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}

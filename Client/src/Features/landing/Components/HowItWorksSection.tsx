@@ -1,42 +1,22 @@
 import { motion } from "framer-motion"
 
 const steps = [
-  {
-    num: "01",
-    title: "Idea",
-    desc: "You have a concept, a hackathon topic, or a problem you want to solve. You define the stack and target goals."
-  },
-  {
-    num: "02",
-    title: "Find Builders",
-    desc: "Publish your project page. PeerY indexes your needs and presents it to active developers who match your requirements."
-  },
-  {
-    num: "03",
-    title: "Match",
-    desc: "Our compatibility engine runs behind the scenes. No swiping. We match based on commits, shared tech, and timezone alignment."
-  },
-  {
-    num: "04",
-    title: "Chat",
-    desc: "Open direct, context-rich chat threads. PeerY integrates with Discord and Slack for seamless onboarding."
-  },
-  {
-    num: "05",
-    title: "Build & Ship",
-    desc: "Deploy code. Push to main. Share the finished product with the community and show off what you built together."
-  }
+  { num: "01", title: "Post the idea", desc: "Define the stack, the goal, and the roles you need filled." },
+  { num: "02", title: "Get matched", desc: "PeerY scores active builders against your requirements — skills, stack and availability." },
+  { num: "03", title: "Lock the match", desc: "Both sides accept. No open chat, no cold DMs — the thread opens once it's mutual." },
+  { num: "04", title: "Move into the workspace", desc: "Kanban board, milestones and member roles are ready the moment you match." },
+  { num: "05", title: "Ship it", desc: "Push to main, then show the finished build to a community that actually ships." },
 ]
 
 export function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="py-32 px-6 max-w-7xl mx-auto border-t border-zinc-900">
-      <div className="space-y-4 mb-16">
+    <section id="how-it-works" className="py-20 sm:py-28 md:py-32 px-5 sm:px-6 max-w-7xl mx-auto border-t border-zinc-900">
+      <div className="space-y-4 mb-12 sm:mb-16">
         <span className="text-sm font-semibold tracking-wider text-blue-500 uppercase">Workflow</span>
-        <h2 className="text-4xl font-bold tracking-tight">How PeerY Works</h2>
+        <h2 className="font-display text-3xl sm:text-4xl font-bold tracking-tight">How PeerY works</h2>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
         {steps.map((step, idx) => (
           <motion.div
             key={idx}
